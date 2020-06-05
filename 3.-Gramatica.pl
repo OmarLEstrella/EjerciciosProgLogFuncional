@@ -1,4 +1,5 @@
 %
+% López Estrella Omar
 %	Gramatica
 %
 %	<expr> ::= <op> <numero> <numero>
