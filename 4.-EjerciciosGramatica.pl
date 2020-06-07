@@ -1,3 +1,4 @@
+% López Estrella Omar
 % Desarrolle un predicado que permita validar un NIP de una banco que
 % Responde a la siguiente gramatica
 % Nip ::= <Digito> ' ' <Digito> ' ' <Digito> ' ' <Digito>
