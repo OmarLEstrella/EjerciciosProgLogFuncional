@@ -63,20 +63,17 @@ op1([F|C]) :- F == "2", oct_masc([F|C]); F == "1", op2([F|C]).
 
 
 % Validar Mascara de Red
-maskR(MASC) :- split_string(MASC,".",",",M), separa_masc(M).
+maskR(MASC) :- split_string(MASC,".",",",M), valida_iniciomasc(M).
 
-separa_masc([F|[]])  :- valida_iniciomasc(F).
+separa_masc([O|C])    :- si(O), separa_masc(C).
+separa_masc([O|[]])   :- si(O).
 
-separa_masc([F|C])  :- valida_iniciomasc(F), separa_masc(C).
+valida_iniciomasc([O|[]]) :- string_length(O,R), R == 3, op1_masc(O);
+                             string_length(O,R), R == 1, si(O).
 
-valida_iniciomasc(S) :- string_length(S,R), R == 3, preparar_string(S,RS), op1_masc(RS);
-                        string_length(S,R), R == 2, preparar_string(S,RS), op2_masc(RS);
-                        string_length(S,R), R == 1, si(S).
+valida_iniciomasc([O|C]) :- string_length(O,R), R == 3, op1_masc(O), valida_iniciomasc(C);
+                            string_length(O,R), R == 1, si(O), separa_masc(C).
 
-op1_masc([O|C])  :- O == "2", oct_masc([O|C]);
-                    O == "1", op2_masc([O|C]).
-
-op2_masc([O|[]]) :- digito(O).
-op2_masc([O|C])  :- digito(O), op2_masc(C).
-
+op1_masc(N) :-  N ==  "128"; N == "192"; N == "224";
+			          N == "240";  N == "248"; N == "252"; N == "254"; N == "255".
 si(O) :- O == "0".
